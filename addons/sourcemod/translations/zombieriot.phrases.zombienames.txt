@@ -22,6 +22,10 @@
 		"it"		"Z-Main"
 		"ko"		"Z-Main"
 	}
+	"Enhanced W.F. Elite Brawler"
+	{
+		"en"		"Enhanced W.F. Elite Brawler"
+	}
 	"Fortified Headcrab Zombie"
 	{
 		"en" 		"Fortified Headcrab Zombie"

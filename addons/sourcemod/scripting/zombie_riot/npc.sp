@@ -860,6 +860,7 @@ void NPC_ConfigSetup()
 	CorruptedBarney_OnMapStart_NPC();
 	XenoMalfuncRobot_OnMapStart_NPC();
 	
+	RaidbossGrandExpertFighter_MapStart_NPC();
 
 	// Bloon Raid Low Prio
 	Bloonarius_MapStart();
@@ -1775,6 +1776,8 @@ Action NpcSpecificOnTakeDamage(int victim, int &attacker, int &inflictor, float 
 #include "npc/raidmode_bosses/npc_true_fusion_warrior.sp"
 #include "npc/raidmode_bosses/npc_blitzkrieg.sp"
 #include "npc/raidmode_bosses/npc_god_alaxios.sp"
+#include "npc/raidmode_bosses/npc_grand_expert_fighter.sp"
+
 
 #if defined RUINA_BASE
 //Ruina
