@@ -480,22 +480,6 @@ public void RaidbossGrandExpertFighter_ClotThink(int iNPC)
 		return;
 	}
 
-	// -----------------------------------------------------------------------
-	// NEW ABILITY: Hellish Rock Zone
-	// Runs at all HP levels, returns true while active (blocks normal combat)
-	// -----------------------------------------------------------------------
-	if(GEF_RockZoneAbility(npc, gameTime))
-		return;
-
-	// -----------------------------------------------------------------------
-	// NEW ABILITY: Outlander Laser Burst — Phase 2 only (after half HP)
-	// -----------------------------------------------------------------------
-	if(npc.m_flGrandExpertAngerResistance && GEF_OutlanderLaserAbility(npc, gameTime))
-		return;
-
-	// -----------------------------------------------------------------------
-	// NEW ABILITY: Clone Summon — Phase 2 only (after half HP)
-	// -----------------------------------------------------------------------
 	if(npc.m_flGrandExpertAngerResistance && GEF_CloneAbility(npc, gameTime))
 		return;
 
@@ -744,14 +728,7 @@ public void RaidbossGrandExpertFighter_NPCDeath(int entity)
 	fl_GEF_CloneLifespan[entity] = 0.0;
 }
 
-// =============================================================================
-// ABILITY: Hellish Rock Zone
-// Adapted from Vhxis's VoidVhxis_GroundQuake.
-// White colored, more rocks (MaxCount 8, 20 repeats, 0.15s between pillars),
-// tighter timing. Players INSIDE the zone get pulled toward the boss + Teslar
-// Shock. Players OUTSIDE the zone get slammed upward + heavy damage.
-// Cooldown: 45s normal, 28s after half HP.
-// =============================================================================
+
 
 #define GEF_ZONE_RANGE         850.0
 #define GEF_ZONE_DAMAGE        (120.0)   // flat — no RaidModeScaling here since GEF uses flat damage
@@ -857,11 +834,9 @@ bool GEF_RockZoneAbility(RaidbossGrandExpertFighter npc, float gameTime)
 		return true;
 	}
 
-	// ---- Cooldown check ----
 	if(npc.m_flZoneAbilityCooldown > gameTime)
 		return false;
 
-	// ---- Start the ability ----
 	npc.m_bisWalking = false;
 	npc.m_iChanged_WalkCycle = 8;
 	npc.AddActivityViaSequence("Stand_to_crouch");
@@ -885,7 +860,6 @@ bool GEF_RockZoneAbility(RaidbossGrandExpertFighter npc, float gameTime)
 		event.Fire();
 	}
 
-	// Spawn the rock pillars — 20 rotations, 8 rocks each, 0.15s between, tight incoming delay
 	pos[2] += 5.0;
 	float ang_Look[3];
 	float DelayPillars     = 3.8;   // slightly faster "incoming" than Vhxis (4.5)
@@ -933,12 +907,7 @@ bool GEF_RockZoneAbility(RaidbossGrandExpertFighter npc, float gameTime)
 }
 
 
-// =============================================================================
-// ABILITY: Outlander Laser Burst (phase 2 only)
-// Adapted from WF_Outlander_LeaderInitiateLaserAttack.
-// GEF stops, winds up for 1.2s, then fires two white laser shots at the
-// target. Damage is cut to ~250 (vs Outlander's 800-850). CD: 18s.
-// =============================================================================
+
 
 bool GEF_OutlanderLaserAbility(RaidbossGrandExpertFighter npc, float gameTime)
 {
@@ -1008,8 +977,6 @@ bool GEF_OutlanderLaserAbility(RaidbossGrandExpertFighter npc, float gameTime)
 }
 
 
-// ---- Laser helper (ported from WF_Outlander_LeaderInitiateLaserAttack) ----
-// Damage is tuned to 250 instead of the outlander's 800-850.
 
 static bool GEF_Laser_TraceWallsOnly(int entity, int contentsMask)
 {
@@ -1040,7 +1007,6 @@ void GEF_FireLaser_DamagePart(DataPack pack)
 	VectorStart[1]  = pack.ReadFloat();
 	VectorStart[2]  = pack.ReadFloat();
 
-	// Dark blue beam on detonation frame
 	int colorLayer4[4];
 	float diameter = 30.0;
 	SetColorRGBA(colorLayer4, 20, 50, 200, 100);
@@ -1119,20 +1085,6 @@ void GEF_FireLaser(int entity, float VectorTarget[3], float VectorStart[3])
 }
 
 
-// =============================================================================
-// ABILITY: Clone Summon  (phase 2 only — unlocked at 50 % HP)
-//
-// GEF stops briefly, flashes a blue particle, then spawns 2 copies of himself
-// scattered ±300 HU in random directions.  Clones are:
-//   - Fully functional fighters (same think, same melee/explosion attacks)
-//   - Semi-transparent dark-blue tint so players can eventually identify them
-//   - 1/3 of GEF's max HP — killable but not trivial
-//   - No special abilities (zone / laser / clone CDs set to FAR_FUTURE)
-//   - Auto-despawn after 14 seconds with a teleport-out particle
-//
-// CD: 45 s (first use) → 35 s after being triggered once.
-// =============================================================================
-
 bool GEF_CloneAbility(RaidbossGrandExpertFighter npc, float gameTime)
 {
 	if(npc.m_flCloneAbilityCooldown > gameTime)
@@ -1141,7 +1093,6 @@ bool GEF_CloneAbility(RaidbossGrandExpertFighter npc, float gameTime)
 	if(!IsValidEnemy(npc.index, npc.m_iTarget))
 		return false;
 
-	// Brief pause animation
 	npc.m_bisWalking       = false;
 	npc.m_iChanged_WalkCycle = 8;
 	npc.AddActivityViaSequence("Stand_to_crouch");
