@@ -1,26 +1,6 @@
 #pragma semicolon 1
 #pragma newdecls required
 
-/*
-	Sword of Irln
-	Author: Generated for ZR Server
-	
-	A golden eyelander set ablaze — the very blade Bob carries.
-	
-	PAP 0:
-		On melee hit: Apply stacking "Irln's Curse" vulnerability to the target.
-		Each hit adds 10% vulnerability, stacking up to 120% (enemy takes up to 2.2x damage).
-		Stacks decay 10% per second when not hit.
-		The weapon blade is always on fire.
-	
-	PAP 1:
-		M2 = Blazing Tempest
-		Ignites the wielder with an orange burning unusual effect.
-		Fires rapid heavy penetrating blade-bursts for 5 seconds.
-		Each burst pierces through up to 10 enemies in a line, dealing heavy damage.
-		20 second cooldown.
-*/
-
 // --- Vulnerability stacking per NPC ---
 #define IRLN_VULN_PER_HIT		0.10	// 10% per hit
 #define IRLN_VULN_MAX			1.20	// caps at 120%
@@ -260,10 +240,10 @@ public void SwordIrln_M2(int client, int weapon, bool crit, int slot)
 		return;
 	}
 
-	SwordIrln_ActivateTempest(client, weapon);
+	SwordIrln_ActivateTempest(client);
 }
 
-static void SwordIrln_ActivateTempest(int client, int weapon)
+static void SwordIrln_ActivateTempest(int client)
 {
 	b_IrlnTempestActive[client] = true;
 	fl_IrlnTempestEnd[client] = GetGameTime() + IRLN_TEMPEST_DURATION;
