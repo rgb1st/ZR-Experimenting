@@ -1,6 +1,6 @@
 #pragma semicolon 1
 #pragma newdecls required
-
+// a
 static char g_DeathSounds[][] =
 {
 	"player/invuln_off_vaccinator.wav",
