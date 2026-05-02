@@ -657,10 +657,7 @@ stock bool Damage_NPCVictim(int victim, int &attacker, int &inflictor, float &da
 	if(!CheckInHud())
 		RPG_FlatRes(victim, attacker, weapon, damage);
 #endif
-#if defined ZR
-	if(!CheckInHud())
-		damage = SwordIrln_ApplyVuln(victim, damage);
-#endif
+
 	NpcArmorExtra(victim, attacker, inflictor, damage, damagetype);
 	if(!CheckInHud())
 		NpcSpecificOnTakeDamage(victim, attacker, inflictor, damage, damagetype, weapon, damageForce, damagePosition, damagecustom);
@@ -1304,11 +1301,6 @@ static stock float NPC_OnTakeDamage_Equipped_Weapon_Logic(int victim, int &attac
 		case WEAPON_RED_BLADE:
 		{
 			WeaponRedBlade_OnTakeDamageNpc(attacker,victim, damagetype,weapon, damage);
-		}
-		case WEAPON_SWORD_IRLN:
-		{
-			if(!CheckInHud())
-				SwordIrln_OnNPCHit(attacker, victim, damagetype, weapon);
 		}
 		case WEAPON_SICCERINO, WEAPON_WALDCH_SWORD_NOVISUAL, WEAPON_WALDCH_SWORD_REAL:
 		{
