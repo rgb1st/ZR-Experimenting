@@ -335,7 +335,8 @@ enum
     WEAPON_KIT_PURGE_MISC = 163,
 	WEAPON_BOMB_AR = 164,
 	WEAPON_BRICK = 165,
-	WEAPON_SWORD_IRLN = 166
+	WEAPON_KIT_TIMERIPPER = 166,
+	WEAPON_KIT_REDMIST = 167
 }
 
 enum
@@ -704,7 +705,6 @@ float fl_MatrixReflect[MAXENTITIES];
 #include "custom/weapon_angelic_shotgonnus.sp"
 #include "custom/weapon_fullmoon.sp"
 #include "custom/red_blade.sp"
-#include "custom/weapon_sword_irln.sp"
 #include "custom/weapon_rapier.sp"
 #include "custom/wand/weapon_wand_gravaton.sp"
 #include "custom/wand/weapon_wand_reiuji.sp"
@@ -747,6 +747,8 @@ float fl_MatrixReflect[MAXENTITIES];
 #include "custom/weapon_bombplant_smg.sp"
 #include "custom/weapon_guiding_missile.sp"
 #include "custom/kit_heartbroken.sp"
+#include "custom/kit_timeripper.sp"
+#include "custom/kit_redmist.sp"
 
 
 
@@ -1050,7 +1052,6 @@ void ZR_MapStart()
 	Rusty_Rifle_Precache();
 	Kit_Blitzkrieg_Precache();
 	ResetMapStartRedBladeWeapon();
-	SwordIrln_MapStart();
 	Mapstart_Chainsaw();
 	Gravaton_Wand_MapStart();
 	Reiuji_Wand_OnMapStart();
