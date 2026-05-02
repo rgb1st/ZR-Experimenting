@@ -84,13 +84,13 @@ static Action Timer_TimeRipper(Handle timer, DataPack pack)
 			f_TR_StolenTime[client] = 0.0;
 	}
 
-	TR_ApplyPassiveBonuses(client, weapon);
+	TR_ApplyPassiveBonuses(client);
 	TR_ShowHUD(client);
 
 	return Plugin_Continue;
 }
 
-static void TR_ApplyPassiveBonuses(int client, int weapon)
+static void TR_ApplyPassiveBonuses(int client)
 {
 	float st = f_TR_StolenTime[client];
 	int level = i_TR_WeaponLevel[client];
