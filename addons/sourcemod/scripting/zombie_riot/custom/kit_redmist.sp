@@ -316,7 +316,8 @@ static void RM_ActivateEGO(int client)
 	float pos[3];
 	WorldSpaceCenter(client, pos);
 	spawnRing_Vectors(pos, 350.0, 0.0, 0.0, 0.0, RM_BEAM_MATERIAL, 180, 0, 0, 230, 1, 0.6, 5.0, 0.3, 1, 1.0);
-	float pos2[3] = pos;
+	float pos2[3];
+	pos2 = pos;
 	pos2[2] += 60.0;
 	spawnRing_Vectors(pos2, 220.0, 0.0, 0.0, 0.0, RM_BEAM_MATERIAL, 220, 10, 10, 180, 1, 0.5, 5.0, 0.25, 1, 1.0);
 
@@ -564,7 +565,8 @@ public void RedMist_GreatSplitHorizontal(int client, int weapon, bool crit, int 
 	spawnRing_Vectors(origin, RM_SPLIT_H_RADIUS * 2.0, 0.0, 0.0, 0.0,
 		RM_BEAM_MATERIAL, 200, 0, 0, 220, 1, 0.6, 6.0, 0.35, 1, 1.0);
 
-	float origin2[3] = origin;
+	float origin2[3];
+	origin2 = origin;
 	origin2[2] += 80.0;
 	spawnRing_Vectors(origin2, RM_SPLIT_H_RADIUS * 1.6, 0.0, 0.0, 0.0,
 		RM_BEAM_MATERIAL, 230, 20, 0, 170, 1, 0.5, 5.0, 0.3, 1, 1.0);
